@@ -62,6 +62,16 @@ body {
 .screen { display: none; width: 100%; min-height: 100dvh; }
 .screen.active { display: block; }
 
+/* ── Splash / Loading ── */
+.splash-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
 /* ═══════════════════════════════════════════════════════════
    AUTH SCREEN
 ═══════════════════════════════════════════════════════════ */
