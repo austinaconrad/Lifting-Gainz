@@ -51,15 +51,26 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   initWorkoutModal();
 
+  // If previously logged in, pre-show the app shell instantly
+  // so there's no flash of the login screen on return visits
+  const wasLoggedIn = localStorage.getItem("ironsquad_authed") === "1";
+  if (wasLoggedIn) {
+    document.getElementById("loading-screen").classList.remove("active");
+    showApp();
+  }
+
   onAuthStateChanged(auth, async user => {
+    document.getElementById("loading-screen").classList.remove("active");
     if (user) {
       STATE.user = user;
+      localStorage.setItem("ironsquad_authed", "1");
       await loadProfile();
       showApp();
       renderDashboard();
     } else {
       STATE.user = null;
       STATE.profile = null;
+      localStorage.removeItem("ironsquad_authed");
       showAuth();
     }
   });
